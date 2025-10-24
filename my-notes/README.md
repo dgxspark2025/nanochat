@@ -71,3 +71,5 @@ torchrun --standalone --nproc_per_node=gpu -m scripts.base_train -- --depth=20
 ```
 
 
+Is this with the default --device_batch_size=32?
+
