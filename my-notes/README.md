@@ -62,5 +62,12 @@ export PATH=/usr/local/cuda-13.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-13.0/lib64:${LD_LIBRARY_PATH}
 ```
 
+Run pre-training
+
+Now you should be able to run pre-training on your GDX Spark with the usual command from the nanochat instructions:
+
+```
+torchrun --standalone --nproc_per_node=gpu -m scripts.base_train -- --depth=20
+```
 
 
