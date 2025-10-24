@@ -12,6 +12,10 @@ source .venv/bin/activate
 ```
 
 ```
+uv sync --extra gpu
+```
+
+```
 # Install Rust / Cargo
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source "$HOME/.cargo/env"
@@ -67,6 +71,8 @@ Run pre-training
 Now you should be able to run pre-training on your GDX Spark with the usual command from the nanochat instructions:
 
 ```
+uv sync --extra gpu
+
 torchrun --standalone --nproc_per_node=gpu -m scripts.base_train -- --depth=20
 ```
 
