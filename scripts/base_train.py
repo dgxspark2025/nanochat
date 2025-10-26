@@ -156,7 +156,7 @@ warmup_ratio = 0.0 # ratio of iterations for LR warmup
 warmdown_ratio = 0.2 # ratio of iterations for LR warmdown
 final_lr_frac = 0.0 # final LR is this fraction of the initial LR
 def get_lr_multiplier(it):
-    warmup_iters = round(warmup_ratio * num_iterations)
+    warmup_modeliters = round(warmup_ratio * num_iterations)
     warmdown_iters = round(warmdown_ratio * num_iterations)
     if it < warmup_iters:
         return (it + 1) / warmup_iters

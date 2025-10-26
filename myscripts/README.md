@@ -3,3 +3,6 @@
 uv run python -m myscripts.image --load-only
 ```
 
+```
+uv run python -m myscripts.image
+```

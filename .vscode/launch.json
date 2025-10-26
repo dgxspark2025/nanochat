@@ -11,6 +11,14 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false,
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}:${workspaceFolder}/lib",
+                "TRITON_PTXAS_PATH": "/usr/local/cuda-13.0/bin/ptxas",
+                "CUDA_HOME": "/usr/local/cuda-13.0",
+                "PATH": "/usr/local/cuda-13.0/bin:${env:PATH}",
+                "LD_LIBRARY_PATH": "/usr/local/cuda-13.0/lib64:${env:LD_LIBRARY_PATH}",
+            },
         }
     ]
 }
