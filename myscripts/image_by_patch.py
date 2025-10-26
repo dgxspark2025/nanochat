@@ -4,6 +4,7 @@ Run as:
 python -m myscripts.image_by_patch
 """
 
+import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -11,6 +12,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 from nanochat.gpt import GPT, GPTConfig
+from nanochat.checkpoint_manager import save_checkpoint
 
 class PatchEmbedding(nn.Module):
     def __init__(self, patch_size=2, embed_dim=256):
@@ -135,6 +137,29 @@ def train_patch_classifier():
                 test_correct += predicted.eq(labels).sum().item()
         
         print(f"Test Acc: {100.*test_correct/test_total:.2f}%\n")
+    
+    checkpoint_dir = ".checkpoints/image_by_patch"
+    save_checkpoint(
+        checkpoint_dir,
+        num_epochs,
+        model.state_dict(),
+        [optimizer.state_dict()],
+        {
+            "num_epochs": num_epochs,
+            "test_accuracy": 100.*test_correct/test_total,
+            "model_config": {
+                "sequence_len": 196,
+                "vocab_size": 1,
+                "n_layer": 6,
+                "n_head": 4,
+                "n_kv_head": 4,
+                "n_embd": 256,
+            },
+            "patch_size": 2,
+            "num_classes": 10,
+        }
+    )
+    print(f"Model checkpoint saved to {checkpoint_dir}")
 
 if __name__ == "__main__":
     train_patch_classifier()
