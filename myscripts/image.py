@@ -27,7 +27,7 @@ def create_image_classifier(num_classes=10, image_size=28):
     
     model.classifier_head = nn.Linear(config.n_embd, num_classes)
     nn.init.zeros_(model.classifier_head.weight)
-    nn.init.zeros_images(model.classifier_head.bias)
+    nn.init.zeros_(model.classifier_head.bias)
     
     return model
 
