@@ -9,3 +9,5 @@ eval_bundle/
 data/
 
 .checkpoints/
+
+cuda-repo-ubuntu2404-13-0-local_13.0.2-580.95.05-1_arm64.deb
