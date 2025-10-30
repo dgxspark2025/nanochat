@@ -5,3 +5,7 @@ rustbpe/target/
 dev-ignore/
 report.md
 eval_bundle/
+
+cuda-repo-ubuntu2404-13-0-local_13.0.2-580.95.05-1_arm64.deb
+data/
+
