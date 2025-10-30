@@ -4,5 +4,5 @@ uv run python -m myscripts.image --load-only
 ```
 
 ```
-uv run python -m myscripts.image_by_patch
+uv run python -m myscripts.mnist.image_by_patch
 ```
