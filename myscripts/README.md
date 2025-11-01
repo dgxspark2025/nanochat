@@ -12,5 +12,5 @@ uv run python -m myscripts.tiny_imagenet.image_by_patch
 ```
 
 ```
-uv run python -m myscripts.cifar.image_by_patch
+uv run python -m myscripts.cifar.image_by_patch --num_epochs 10
 ```

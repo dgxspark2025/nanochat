@@ -1,9 +1,10 @@
 """
 Image categorization training using GPT model with 4x4 patches.
 Run as:
-python -m myscripts.cifar.image_by_patch
+python -m myscripts.cifar.image_by_patch --num_epochs=10
 """
 
+import argparse
 import os
 import torch
 import torch.nn as nn
@@ -49,7 +50,7 @@ def create_patch_classifier(num_classes=10, image_size=32, patch_size=4):
     
     return model
 
-def train_patch_classifier():
+def train_patch_classifier(num_epochs=5):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     
@@ -68,8 +69,6 @@ def train_patch_classifier():
     model = model.to(device)
     
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=0.01)
-    
-    num_epochs = 5
     for epoch in range(num_epochs):
         model.train()
         train_loss = 0.0
@@ -162,4 +161,8 @@ def train_patch_classifier():
     print(f"Model checkpoint saved to {checkpoint_dir}")
 
 if __name__ == "__main__":
-    train_patch_classifier()
+    parser = argparse.ArgumentParser(description="Train CIFAR-10 classifier with patch-based GPT")
+    parser.add_argument("--num_epochs", type=int, default=5, help="Number of training epochs (default: 5)")
+    args = parser.parse_args()
+    
+    train_patch_classifier(num_epochs=args.num_epochs)
