@@ -7,7 +7,7 @@ python -m myscripts.cifar.show_data
 from torchvision import datasets, transforms
 from PIL import Image
 
-def print_image_ascii(img_tensor, width=64):
+def print_image_ascii(img_tensor, width=32):
     img = transforms.ToPILImage()(img_tensor)
     w, h = img.size
     aspect_ratio = h / w
