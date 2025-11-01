@@ -69,7 +69,11 @@ def sample_predict():
     checkpoint_dir = ".checkpoints/cifar10_by_patch"
     
     from nanochat.checkpoint_manager import find_last_step
+    import os
     step = find_last_step(checkpoint_dir)
+    
+    model_path = os.path.join(checkpoint_dir, f"model_{step:06d}.pt")
+    print(f"Loading model from: {model_path}")
     
     model_data, optimizer_data, meta_data = load_checkpoint(checkpoint_dir, step, device, load_optimizer=False)
     
