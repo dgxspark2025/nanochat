@@ -1,3 +1,17 @@
+
+uv venv .venv
+uv venv --python 3.12 --with-pip .venv
+source .venv/bin/activate
+
+python -m ensurepip --upgrade
+python -m pip install --upgrade pip
+
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+
+
+
+
+
 See https://github.com/karpathy/nanochat/discussions/28
 
 ```
