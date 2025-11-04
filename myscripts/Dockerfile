@@ -33,7 +33,11 @@ ENV PATH="/root/.cargo/bin:/root/.local/bin:${PATH}"
 
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
+RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+
 WORKDIR /app
+
+COPY . .
 
 COPY pyproject.toml README.md ./
 COPY rustbpe ./rustbpe
@@ -41,7 +45,5 @@ COPY rustbpe ./rustbpe
 RUN uv sync --extra gpu --group dev
 
 RUN uv run maturin develop --manifest-path rustbpe/Cargo.toml
-
-COPY . .
 
 CMD ["/bin/bash"]
