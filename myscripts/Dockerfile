@@ -15,9 +15,12 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
+# wget https://developer.download.nvidia.com/compute/cuda/13.0.2/local_installers/cuda-repo-ubuntu2404-13-0-local_13.0.2-580.95.05-1_arm64.deb && \
+
+COPY data/cuda-repo-ubuntu2404-13-0-local_13.0.2-580.95.05-1_arm64.deb ./
+
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa/cuda-ubuntu2404.pin && \
     mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600 && \
-    wget https://developer.download.nvidia.com/compute/cuda/13.0.2/local_installers/cuda-repo-ubuntu2404-13-0-local_13.0.2-580.95.05-1_arm64.deb && \
     dpkg -i cuda-repo-ubuntu2404-13-0-local_13.0.2-580.95.05-1_arm64.deb && \
     cp /var/cuda-repo-ubuntu2404-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/ && \
     apt-get update && \
@@ -32,6 +35,13 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:/root/.local/bin:${PATH}"
 
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
+RUN uv venv --python 3.12 --with-pip .venv && \
+    source .venv/bin/activate && \
+    python -m ensurepip --upgrade && \
+    python -m pip install --upgrade pip && \
+    which python && \
+    which pip
 
 RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
 
