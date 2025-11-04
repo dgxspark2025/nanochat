@@ -19,6 +19,6 @@ uv run python -m myscripts.cifar.image_by_patch --num_epochs 10
 
 ## Build docker image
 
-docker build -f myscripts/Dockerfile -t nanochat:latest
+docker build -f myscripts/Dockerfile -t nanochat:latest .
 
 docker run -it --gpus all nanochat:latest /bin/bash
