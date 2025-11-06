@@ -96,3 +96,19 @@ Is this with the default --device_batch_size=32?
 
 Get pytorch version: python -c "import torch; print(torch.__version__)"
 
+
+
+## midtrain
+
+```
+# Setup CUDA environment variables for Grace Blackwell GB10
+export TRITON_PTXAS_PATH=/usr/local/cuda-13.0/bin/ptxas
+export CUDA_HOME=/usr/local/cuda-13.0
+export PATH=/usr/local/cuda-13.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-13.0/lib64:${LD_LIBRARY_PATH}
+
+# Set optimized settings for DGX Spark GB10
+# from https://github.com/jasonacox/dgx-spark/blob/main/nanochat/midtrain.sh#L59C1-L61C30
+export PYTORCH_ALLOC_CONF=max_split_size_mb:512
+export CUDA_LAUNCH_BLOCKING=0
+```
