@@ -112,3 +112,10 @@ export LD_LIBRARY_PATH=/usr/local/cuda-13.0/lib64:${LD_LIBRARY_PATH}
 export PYTORCH_ALLOC_CONF=max_split_size_mb:512
 export CUDA_LAUNCH_BLOCKING=0
 ```
+
+
+torchrun --standalone --nproc_per_node=gpu -m scripts.mid_train -- --run=$WANDB_RUN
+
+torchrun --standalone --nproc_per_node=gpu -m scripts.chat_eval -- -i rl -a GSM8K
+
+python -m scripts.chat_web
