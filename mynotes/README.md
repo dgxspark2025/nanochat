@@ -97,6 +97,12 @@ Is this with the default --device_batch_size=32?
 Get pytorch version: python -c "import torch; print(torch.__version__)"
 
 
+## After base_train
+
+torchrun --standalone --nproc_per_node=gpu -m scripts.base_loss
+
+torchrun --standalone --nproc_per_node=gpu -m scripts.base_eval
+
 
 ## midtrain
 
@@ -113,6 +119,7 @@ export PYTORCH_ALLOC_CONF=max_split_size_mb:512
 export CUDA_LAUNCH_BLOCKING=0
 ```
 
+WANDB_RUN=dummy
 
 torchrun --standalone --nproc_per_node=gpu -m scripts.mid_train -- --run=$WANDB_RUN
 
