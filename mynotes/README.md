@@ -119,10 +119,24 @@ export PYTORCH_ALLOC_CONF=max_split_size_mb:512
 export CUDA_LAUNCH_BLOCKING=0
 ```
 
-WANDB_RUN=dummy
+export WANDB_RUN=dummy
 
 torchrun --standalone --nproc_per_node=gpu -m scripts.mid_train -- --run=$WANDB_RUN
+torchrun --standalone --nproc_per_node=gpu -m scripts.chat_eval -- -i mid
+
+torchrun --standalone --nproc_per_node=gpu -m scripts.chat_sft -- --run=$WANDB_RUN
+torchrun --standalone --nproc_per_node=gpu -m scripts.chat_eval -- -i sft
+
+python -m scripts.chat_cli -p "Why is the sky blue?"
+
+torchrun --standalone --nproc_per_node=gpu -m scripts.chat_rl -- --run=$WANDB_RUN
+
+python -m scripts.chat_cli -p "Why is the sky blue?" -i rl
+
 
 torchrun --standalone --nproc_per_node=gpu -m scripts.chat_eval -- -i rl -a GSM8K
+
+
+
 
 python -m scripts.chat_web
